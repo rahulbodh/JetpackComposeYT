@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -236,6 +237,14 @@ fun TextStyling(modifier: Modifier = Modifier) {
 
                 }
         )
+
+        SelectionContainer {
+            Text(
+                text = "Selectable Text" ,
+                fontSize = 20.sp,
+                modifier = Modifier.padding(8.dp ,16.dp)
+            )
+        }
 
     }
 }
