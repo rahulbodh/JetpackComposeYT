@@ -91,6 +91,7 @@ fun TextStyling( modifier: Modifier = Modifier) {
                 )
             ),
             modifier = Modifier.padding(16.dp)
+                .background(Color.Yellow , shape = RoundedCornerShape(8.dp))
         )
         
         Text(
