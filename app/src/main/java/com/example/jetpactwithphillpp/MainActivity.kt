@@ -1,11 +1,14 @@
 package com.example.jetpactwithphillpp
 
+import android.R.style
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,12 +33,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,12 +55,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             JetpactWithPhillppTheme {
-                val painter = painterResource(id = R.drawable.iron_man)
-                ImageCard(
-                    painter = painter,
-                    contentDescription = "Image is pretty cool",
-                    title = "Image is pretty cool"
-                )
+//                val painter = painterResource(id = R.drawable.iron_man)
+//                ImageCard(
+//                    painter = painter,
+//                    contentDescription = "Image is pretty cool",
+//                    title = "Image is pretty cool"
+//                )
+
+                TextStyling()
             }
 
         }
@@ -66,6 +76,33 @@ fun TextStyling(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .background(Color.Cyan)
     ) {
+
+        Text(
+            text = buildAnnotatedString {
+                withStyle(style = SpanStyle(color = Color.Red, fontStyle = FontStyle.Italic)) {
+                    append("J")
+                }
+                withStyle(style = SpanStyle(color = Color.Blue, fontStyle = FontStyle.Italic)) {
+                    append("etpack ")
+                }
+
+                withStyle(style = SpanStyle(color = Color.Red, fontStyle = FontStyle.Italic)) {
+                    append("C")
+                }
+                withStyle(style = SpanStyle(color = Color.Blue, fontStyle = FontStyle.Italic)) {
+                    append("ompose")
+                }
+            } ,
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+            textDecoration = TextDecoration.Underline,
+            letterSpacing = 2.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        )
+
         Text(
             text = "Jetpack Compose",
             lineHeight = 30.sp,
@@ -186,6 +223,20 @@ fun TextStyling(modifier: Modifier = Modifier) {
                 )
             }
         }
+
+        Text (
+            text = "This is a very long text that will be truncated with an ellipsis. This ",
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            fontSize = 18.sp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp , 16.dp)
+                .clickable {
+
+                }
+        )
+
     }
 }
 
