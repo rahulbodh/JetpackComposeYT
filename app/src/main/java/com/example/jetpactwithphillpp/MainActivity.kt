@@ -60,10 +60,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun TextStyling( modifier: Modifier = Modifier) {
-    Column ( modifier = modifier
-        .fillMaxSize()
-        .background(Color.Cyan)){
+fun TextStyling(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(Color.Cyan)
+    ) {
         Text(
             text = "Jetpack Compose",
             lineHeight = 30.sp,
@@ -86,14 +88,15 @@ fun TextStyling( modifier: Modifier = Modifier) {
             style = TextStyle(
                 shadow = Shadow(
                     color = Color.Black.copy(alpha = 0.5f),
-                    offset = Offset(4f ,4f),
+                    offset = Offset(4f, 4f),
                     blurRadius = 8f
                 )
             ),
-            modifier = Modifier.padding(16.dp)
-                .background(Color.Yellow , shape = RoundedCornerShape(8.dp))
+            modifier = Modifier
+                .padding(16.dp)
+                .background(Color.Yellow, shape = RoundedCornerShape(8.dp))
         )
-        
+
         Text(
             text = "Underline and Striketroough text",
             style = MaterialTheme.typography.bodyMedium,
@@ -107,6 +110,82 @@ fun TextStyling( modifier: Modifier = Modifier) {
             modifier = Modifier.padding(16.dp)
         )
 
+        // Linear Gradient
+        Text(
+            text = "Hello, Rahul",
+            style = TextStyle(
+                brush = Brush.linearGradient(
+                    colors = listOf(Color.Red, Color.Blue),
+                    start = Offset(0f, 0f),
+                    end = Offset(100f, 100f)
+                ),
+                fontSize = 30.sp
+            ),
+            modifier = Modifier.padding(16.dp)
+        )
+
+        // Radial Gradient
+        Text(
+            text = "Welcome to Gemini",
+            style = TextStyle(
+                brush = Brush.radialGradient(
+                    colors = listOf(Color.Red, Color.Blue),
+                    center = Offset(80f, 80f),
+                    radius = 100f
+                ),
+                fontSize = 30.sp
+            ),
+            modifier = Modifier.padding(16.dp)
+        )
+
+        // Sweep Gradient text
+        Text(
+            text = "How can I help you?",
+            style = TextStyle(
+                brush = Brush.sweepGradient(
+                    colors = listOf(Color.Red, Color.Blue),
+                    center = Offset(50f, 50f),
+                ),
+                fontSize = 30.sp
+            ),
+            modifier = Modifier.padding(16.dp)
+        )
+
+        // Gradient Backround in ImageCard - like composable
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            shape = RoundedCornerShape(15.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .height(200.dp)
+                    .background(
+                        brush = Brush.linearGradient(
+                            colors = listOf(Color.Blue, Color.Green),
+                            start = Offset(0f, 0f),
+                            end = Offset(0f, 200f)
+                        )
+                    )
+            ) {
+                Text(
+                    text = "Gradient Card",
+                    style = TextStyle(
+                        brush = Brush.radialGradient(
+                            colors = listOf(Color.White, Color.Yellow),
+                            radius = 100f
+                        ),
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
+                    ),
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .padding(16.dp)
+                )
+            }
+        }
     }
 }
 
