@@ -41,6 +41,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -55,6 +56,10 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ChainStyle
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
+import androidx.constraintlayout.compose.Dimension
 import com.example.jetpactwithphillpp.ui.theme.JetpactWithPhillppTheme
 import kotlin.random.Random
 
@@ -64,8 +69,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
 
+            ConstraintsLayoutExample()
 //            ColoredBox()
-            ListExample()
+//            ListExample()
 
 
 //            JetpactWithPhillppTheme {
@@ -83,12 +89,51 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+// Constraints Layout
+@Composable
+fun ConstraintsLayoutExample() {
+
+    val constraints = ConstraintSet {
+        val greenBox = createRefFor("greenbox")
+        val redBox = createRefFor("redbox")
+        val guideline = createGuidelineFromTop(0.5f)
+
+        constrain(greenBox) {
+            top.linkTo(guideline)
+            start.linkTo(parent.start)
+            width = Dimension.value(100.dp)
+            height = Dimension.value(100.dp)
+
+        }
+        constrain(redBox) {
+            top.linkTo(guideline)
+            start.linkTo(greenBox.end)
+            end.linkTo(parent.end)
+            width = Dimension.value(100.dp)
+            height = Dimension.value(100.dp)
+        }
+
+        createHorizontalChain(greenBox  , redBox )
+    }
+
+    ConstraintLayout(constraints , modifier = Modifier.fillMaxSize()){
+        Box(modifier = Modifier
+            .background(Color.Green)
+            .layoutId("greenbox"))
+        Box(modifier = Modifier
+            .background(Color.Red)
+            .layoutId("redbox"))
+    }
+
+}
+
+// List
 @Composable
 fun ListExample(modifier: Modifier = Modifier) {
-    val items = listOf("This" , "is" , "Jetpack" , "Compose")
+    val items = listOf("This", "is", "Jetpack", "Compose")
 
-    LazyColumn(modifier = Modifier){
-        itemsIndexed(items){ index , string ->
+    LazyColumn(modifier = Modifier) {
+        itemsIndexed(items) { index, string ->
             Text(
                 text = string,
                 fontSize = 20.sp,
@@ -365,6 +410,7 @@ fun ImageCard(
 @Preview(showBackground = true)
 @Composable
 fun FunctionPreview() {
-    ColoredBox()
+    ConstraintsLayoutExample()
+//    ColoredBox()
 //    TextStyling()
 }
