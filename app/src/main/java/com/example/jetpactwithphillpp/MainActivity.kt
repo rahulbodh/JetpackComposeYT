@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
@@ -83,12 +85,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ListExample(modifier: Modifier = Modifier) {
-    Column(
-        modifier = Modifier.verticalScroll(rememberScrollState())
-    ) {
-        for (i in 1..30) {
+    LazyColumn{
+        items (5000){
             Text(
-                text = "Item $i",
+                text = "Item $it",
+                fontSize = 20.sp,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
