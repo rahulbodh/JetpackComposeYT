@@ -59,7 +59,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
 
-            ColoredBox()
+//            ColoredBox()
+            ListExample()
 
 
 //            JetpactWithPhillppTheme {
@@ -78,23 +79,38 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun ListExample(modifier: Modifier = Modifier) {
+    Column {
+        for (i in 1..30) {
+            Text(
+                text = "Item $i",
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            )
+        }
+    }
+}
+
+@Composable
 fun ColoredBox(modifier: Modifier = Modifier) {
 
-    val color = remember {  mutableStateOf(Color.Red) }
-   Box(
-       modifier = modifier
-           .background(color.value)
-           .fillMaxSize()
-           .clickable{
-               color.value = Color(
-                   Random.nextFloat(),
-                   Random.nextFloat(),
-                   Random.nextFloat(),
-                   1f
-               )
+    val color = remember { mutableStateOf(Color.Red) }
+    Box(
+        modifier = modifier
+            .background(color.value)
+            .fillMaxSize()
+            .clickable {
+                color.value = Color(
+                    Random.nextFloat(),
+                    Random.nextFloat(),
+                    Random.nextFloat(),
+                    1f
+                )
 
-           }
-   )
+            }
+    )
 }
 
 @Composable
@@ -120,7 +136,7 @@ fun TextStyling(modifier: Modifier = Modifier) {
                 withStyle(style = SpanStyle(color = Color.Blue, fontStyle = FontStyle.Italic)) {
                     append("ompose")
                 }
-            } ,
+            },
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             textDecoration = TextDecoration.Underline,
@@ -252,14 +268,14 @@ fun TextStyling(modifier: Modifier = Modifier) {
             }
         }
 
-        Text (
+        Text(
             text = "This is a very long text that will be truncated with an ellipsis. This ",
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             fontSize = 18.sp,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp , 16.dp)
+                .padding(8.dp, 16.dp)
                 .clickable {
 
                 }
@@ -267,9 +283,9 @@ fun TextStyling(modifier: Modifier = Modifier) {
 
         SelectionContainer {
             Text(
-                text = "Selectable Text" ,
+                text = "Selectable Text",
                 fontSize = 20.sp,
-                modifier = Modifier.padding(8.dp ,16.dp)
+                modifier = Modifier.padding(8.dp, 16.dp)
             )
         }
 
