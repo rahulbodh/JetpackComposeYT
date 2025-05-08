@@ -85,10 +85,12 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ListExample(modifier: Modifier = Modifier) {
-    LazyColumn{
-        items (5000){
+    val items = listOf("This" , "is" , "Jetpack" , "Compose")
+
+    LazyColumn(modifier = Modifier){
+        itemsIndexed(items){ index , string ->
             Text(
-                text = "Item $it",
+                text = string,
                 fontSize = 20.sp,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
